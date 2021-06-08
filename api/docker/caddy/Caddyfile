@@ -27,6 +27,8 @@ log
 
 route {
     root * /srv/api/public
+    
+    # TODO make optional
     mercure {
         # Transport to use (default to Bolt)
         transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
@@ -51,7 +53,8 @@ route {
 
     # Comment the following line if you don't want Next.js to catch requests for HTML documents.
     # In this case, they will be handled by the PHP app.
-    reverse_proxy @pwa http://{$PWA_UPSTREAM}
+    # TODO make optional
+    #reverse_proxy @pwa http://{$PWA_UPSTREAM}
 
     php_fastcgi unix//var/run/php/php-fpm.sock
     encode zstd gzip

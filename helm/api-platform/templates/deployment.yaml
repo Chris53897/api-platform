@@ -36,8 +36,11 @@ spec:
           env:
             - name: SERVER_NAME
               value: :80
+	    {{- if .Values.pwa.enabled -}}
             - name: PWA_UPSTREAM
               value: {{ include "api-platform.fullname" . }}-pwa:3000
+	    {{- end }}
+	    {{- if .Values.mercure.enabled -}}
             - name: MERCURE_PUBLISHER_JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -48,6 +51,7 @@ spec:
                 secretKeyRef:
                   name: {{ include "api-platform.fullname" . }}
                   key: mercure-subscriber-jwt-key
+	    {{- end }}
           ports:
             - name: http
               containerPort: 80
@@ -109,6 +113,7 @@ spec:
                 secretKeyRef:
                   name: {{ include "api-platform.fullname" . }}
                   key: database-url
+	    {{- if .Values.mercure.enabled -}}
             - name: MERCURE_PUBLISH_URL
               valueFrom:
                 configMapKeyRef:
@@ -124,6 +129,7 @@ spec:
                 secretKeyRef:
                   name: {{ include "api-platform.fullname" . }}
                   key: mercure-jwt-token
+	    {{- end }}
           volumeMounts:
             - mountPath: /var/run/php
               name: php-socket

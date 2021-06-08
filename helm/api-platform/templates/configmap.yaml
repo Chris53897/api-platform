@@ -10,5 +10,7 @@ data:
   php-cors-allow-origin: {{ .Values.php.corsAllowOrigin | quote }}
   php-trusted-hosts: {{ .Values.php.trustedHosts | quote }}
   php-trusted-proxies: {{ join "," .Values.php.trustedProxies }}
+  {{- if .Values.pwa.enabled -}}
   mercure-publish-url: {{ .Values.mercure.publishUrl | default "http://127.0.0.1/.well-known/mercure" | quote }}
   mercure-subscribe-url: {{ .Values.mercure.subscribeUrl | quote }}
+  {{- end }}

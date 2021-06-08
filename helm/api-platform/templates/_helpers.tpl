@@ -45,6 +45,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Common labels PWA
 */}}
+{{- if .Values.pwa.enabled -}}
 {{- define "api-platform.labelsPWA" -}}
 helm.sh/chart: {{ include "api-platform.chart" . }}
 {{ include "api-platform.selectorLabelsPWA" . }}
@@ -52,6 +53,7 @@ helm.sh/chart: {{ include "api-platform.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -66,10 +68,12 @@ app.kubernetes.io/part-of: {{ include "api-platform.name" . }}
 {{/*
 Selector labels PWA
 */}}
+{{- if .Values.pwa.enabled -}}
 {{- define "api-platform.selectorLabelsPWA" -}}
 app.kubernetes.io/name: {{ include "api-platform.name" . }}-pwa
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/part-of: {{ include "api-platform.name" . }}
+{{- end }}
 {{- end }}
 
 {{/*

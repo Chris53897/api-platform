@@ -21,6 +21,7 @@ php:
     - "192.168.0.0/16"
 
 pwa:
+  enabled: false
   image:
     repository: "chart-example.local/api-platform/pwa"
     pullPolicy: IfNotPresent
@@ -38,6 +39,7 @@ caddy:
 
 # You may prefer using the managed version in production: https://mercure.rocks
 mercure:
+  enabled: false
   publishUrl: ""
   subscribeUrl: https://chart-example.local/.well-known/mercure
   # Change me!
