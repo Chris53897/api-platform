@@ -118,6 +118,7 @@ CMD ["php-fpm"]
 
 # "caddy" stage
 # depends on the "php" stage above
+# TODO make optional
 FROM caddy:${CADDY_VERSION}-builder-alpine AS api_platform_caddy_builder
 
 RUN xcaddy build \
